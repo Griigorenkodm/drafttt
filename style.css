@@ -1,162 +1,154 @@
-body{
-    background-color: rgb(198, 141, 252);
-    opacity: 1;
-     transform:  scale(1);
-     position: relative;
+/* Обнуляем отступы, чтобы ничего не ехало */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(198, 141, 252);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Чтобы не было горизонтальной прокрутки */
+    animation: fadeIn 1.5s ease-in;
+}
 
+/* Контейнер теперь на весь экран для удобства клика */
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    height: 400px; /* Высота области клика */
+    -webkit-tap-highlight-color: transparent; /* Убирает синюю рамку при клике на Android/iOS */
+}
 
 .heart {
-  background-color: red;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-
-  height: 300px;
-  margin: 150px;
-  position: relative;
-  top: 0;
-  transform: rotate(-45deg);
-  width: 300px;
-  /* Привязываем анимацию */
-  animation: pulse 1.2s infinite; 
-  box-shadow: -5px -5px 15px  black;
-transition: 0,5s;
-
-
+    background-color: red;
+    position: relative;
+    /* Уменьшил размер для мобильных: 150px вместо 300px */
+    width: 40vw; 
+    height: 40vw;
+    max-width: 200px;
+    max-height: 200px;
+    
+    transform: rotate(-45deg);
+    animation: pulse 1.2s infinite; 
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+    transition: 0.5s;
+    
+    /* Центрируем текст внутри через грид */
+    display: grid;
+    place-items: center;
 }
-
-
 
 .heart::before, .heart::after {
-  content: "";
-  width: 300px;
-  height: 300px;
-  background-color: red;
-  border-radius: 50%;
-  position: absolute;
- 
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
 }
 
-.heart::before { top: -150px; left: 0; }
-.heart::after { left: 150px; top: 0; }
-
+/* Позиционирование ушек сердца в процентах */
+.heart::before { top: -50%; left: 0; }
+.heart::after { left: 50%; top: 0; }
 
 @keyframes pulse {
-  0% {
-    transform: rotate(-45deg) scale(1);
-  }
-  15% {
-    transform: rotate(-45deg) scale(1.3);
-  }
-  30% {
-    transform: rotate(-45deg) scale(1);
-  }
-  45% {
-    transform: rotate(-45deg) scale(1.15);
-  }
-  60% {
-    transform: rotate(-45deg) scale(1);
-  }
+    0%, 30%, 60% { transform: rotate(-45deg) scale(1); }
+    15% { transform: rotate(-45deg) scale(1.2); }
+    45% { transform: rotate(-45deg) scale(1.1); }
 }
 
-
 .word {
-  position: absolute;
-  opacity: 0;   /* Изначально слово не видно */
-  transition: 0.5s;      /* Плавность перехода */
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  color: white;
-  font-size: 60px;
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    transition: 0.5s;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 8vw; /* Размер текста зависит от экрана */
+    max-size: 40px;
+    text-align: center;
+    pointer-events: none; /* Чтобы текст не мешал кликать по сердцу */
+    transform: rotate(45deg); /* Компенсируем поворот сердца */
+}
+
+/* Состояние при нажатии */
+.container:active .word {
+    opacity: 1;
 }
 
 .container:active .heart {
-  opacity: 1; 
- 
-  transform: rotate(-45deg) scale(1) ; 
-
+    transform: rotate(-45deg) scale(0.9); /* Слегка сжимается при нажатии */
 }
 
-.container:active .word {
-  opacity: 1;       
-  animation: fadeIn 6s ease-in-out;  
+/* Записка снизу */
+
+
+
+.note1 {
+    width: 80%;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.note2 {
+    width: 80%;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 
-.container {
-  position: relative;
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin: 0 auto; /* Центрируем сам контейнер на странице */
+.note3 {
+    width: 80%;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
+h1 {
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    color: #333;
+    line-height: 1.4;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-body {
-    animation: fadeIn 1.5s ease-in; /* Плавность за 1.5 секунды */
-}
-
-
-@keyframes fadeOut {
-  from { opacity: 1; visibility: visible; }
-  to { opacity: 0; visibility: hidden; }
-}
-
-p{
-    
-
-    text-align: center;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-   
-    color: rgb(6, 9, 12);
-   
-}
-
-
-
-.note1{
-    width: 200px;
-    height: 200px;
-    background-color: rgb(247, 244, 244);
-  
-    border-radius: 7%;
-
-    margin-left: 100px;
-    box-shadow: 0 0 15px black;
-
-   
-   
-   
-
-
-}
-
-h1{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    margin: 4px;
-    text-align: center;
-   
-}
-
 .m1{
-    justify-content: center;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    align-items: center;
-
-  
-    
-
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif
+    ;
 }
+
 
