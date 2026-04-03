@@ -23,7 +23,7 @@ body{
   animation: pulse 1.2s infinite; 
   box-shadow: -5px -5px 15px  black;
 transition: 0,5s;
- background: radial-gradient(circle at 50% 50%, #ff4d4d, #b30000);
+
 
 }
 
@@ -36,7 +36,7 @@ transition: 0,5s;
   background-color: red;
   border-radius: 50%;
   position: absolute;
-    background: radial-gradient(circle at 50% 50%, #ff4d4d, #b30000);
+ 
 }
 
 .heart::before { top: -150px; left: 0; }
